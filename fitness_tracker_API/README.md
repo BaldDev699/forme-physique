@@ -59,30 +59,30 @@ This project simulates a real-world backend application focusing on database man
 ⚙️ Installation & Setup
 
 1. Clone the Repository
-    git clone https://github.com/yourusername/forme-physique.git
-    cd forme-physique
-    cd fitness_tracker_API
+    - git clone https://github.com/yourusername/forme-physique.git
+    - cd forme-physique
+    - cd fitness_tracker_API
 
 2. Create Virtual Environment
-    python -m venv venv
-    source venv/bin/activate   # On Linux/Mac
-    venv\Scripts\activate      # On Windows
+    - python -m venv venv
+    - source venv/bin/activate   # On Linux/Mac
+    - venv\Scripts\activate      # On Windows
 
 3. Install Dependencies
-    pip install -r requirements.txt
+    - pip install -r requirements.txt
 
 4. Run Migrations
-    python manage.py makemigrations
-    python manage.py migrate
+    - python manage.py makemigrations
+    - python manage.py migrate
 
 5. Create Superuser
-    python manage.py createsuperuser
+    - python manage.py createsuperuser
 
 6. Run Development Server
-    python manage.py runserver
+    - python manage.py runserver
 
 7. Access API
-    . Base URL: http://127.0.0.1:8000/fitness/
+    - Base URL: http://127.0.0.1:8000/fitness/
 
 
 
