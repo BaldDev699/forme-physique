@@ -48,6 +48,8 @@ class ActivitySerializer(serializers.ModelSerializer):
     def validate(self, data):
         if 'activity_type' not in data:
             raise serializers.ValidationError("Activity type is required.")
+        if 'duration_minutes' not in data or data.get('duration_minutes') is None:
+            raise serializers.ValidationError("Duration is required.")
         if data['duration_minutes'] <= 0:
             raise serializers.ValidationError("Duration must be a positive integer.")
         if 'calories_burned' in data and data['calories_burned'] is not None and data['calories_burned'] < 0:
