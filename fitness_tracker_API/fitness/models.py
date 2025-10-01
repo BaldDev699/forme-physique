@@ -8,7 +8,7 @@ class User(AbstractUser):
 
 # model to track fitness activities
 class Activity(models.Model):
-    # dictionary of activity choices for better data integrity
+    # dictionary of activity choices for better data integrity and consistency
     ACTIVITY_CHOICES = [
         ('running', 'Running'),
         ('cycling', 'Cycling'),
