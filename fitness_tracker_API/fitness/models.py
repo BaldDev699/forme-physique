@@ -11,6 +11,7 @@ class Activity(models.Model):
     # dictionary of activity choices for better data integrity and consistency
     ACTIVITY_CHOICES = [
         ('running', 'Running'),
+        ('walking', 'Walking'),
         ('cycling', 'Cycling'),
         ('swimming', 'Swimming'),
         ('weightlifting', 'Weightlifting'),
@@ -23,7 +24,7 @@ class Activity(models.Model):
     duration_minutes = models.PositiveIntegerField()
     calories_burned = models.PositiveIntegerField(null=True, blank=True)
     distance_km = models.FloatField(null=True, blank=True)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField()
     notes = models.TextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
