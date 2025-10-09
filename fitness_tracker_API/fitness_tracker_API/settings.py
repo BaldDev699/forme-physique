@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'fitness',
+    'accounts',
+    'django_filters',
 ]
 
 REST_FRAMEWORK = {
@@ -49,7 +51,7 @@ REST_FRAMEWORK = {
 }
 
 # Custom user model
-AUTH_USER_MODEL = 'fitness.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

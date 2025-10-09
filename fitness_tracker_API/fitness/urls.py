@@ -1,10 +1,10 @@
 from django.urls import path, include
-from .views import UserRegisterview, UserLoginView, UserLogoutView, ActivityViewSet
+from rest_framework.routers import DefaultRouter
+from .views import ActivityViewSet
+
+router = DefaultRouter()
+router.register(r'activities', ActivityViewSet, basename='activity')
 
 urlpatterns = [
-    path('register/', UserRegisterview.as_view(), name='register'),
-    path('login/', UserLoginView.as_view(), name='login'),
-    path('logout/', UserLogoutView.as_view(), name='logout'),
-    path('activities/', ActivityViewSet.as_view({'get': 'list', 'post': 'create'}), name='activity-list'),
-    path('activities/<int:pk>/', ActivityViewSet.as_view({'get': 'retrieve', 'put': 'update', 'delete': 'destroy'}), name='activity-detail'),
+    path('', include(router.urls)),
 ]

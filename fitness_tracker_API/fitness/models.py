@@ -1,10 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
 from django.conf import settings
-
-# user model which extends AbstractUser
-class User(AbstractUser):
-    pass
 
 # model to track fitness activities
 class Activity(models.Model):
