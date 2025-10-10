@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'fitness',
     'accounts',
+    'notifications',
     'django_filters',
 ]
 
