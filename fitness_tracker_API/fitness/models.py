@@ -38,10 +38,8 @@ class Goal(models.Model):
     ]
 
     PERIOD_CHOICES = [
-        ('daily', 'Daily'),
         ('weekly', 'Weekly'),
         ('monthly', 'Monthly'),
-        ('yearly', 'Yearly'),
     ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='goals')

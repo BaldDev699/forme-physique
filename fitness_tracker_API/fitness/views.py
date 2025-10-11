@@ -4,13 +4,16 @@ from rest_framework.decorators import action
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Sum, Count
 from django.db.models.functions import TruncWeek, TruncMonth
-from .models import Activity
+from .models import Activity, Goal
 from django.contrib.auth import get_user_model
-from .serializers import ActivitySerializer
+from .serializers import ActivitySerializer, GoalSerializer
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
+from datetime import date, timedelta
+from fitness import models
+from notifications.models import Notification
 
         
 # Activity ViewSet to handle CRUD operations and analytics
@@ -36,7 +39,34 @@ class ActivityViewSet(viewsets.ModelViewSet):
         return qs
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        activity = serializer.save(user=self.request.user)
+
+        goals = self.request.user.goals.filter(achieved=False)
+        for goal in goals:
+            if goal.period == 'weekly':
+                start_date = date.today() - timedelta(days=7)
+            else:
+                start_date = date.today().replace(day=1)
+
+            activities = self.request.user.activities.filter(date__gte=start_date)
+
+            # calculate progress based on goal type
+            if goal.goal_type == 'distance':
+                progress = activities.aggregate(models.Sum('distance_km'))['distance_km__sum'] or 0
+            elif goal.goal_type == 'duration':
+                progress = activities.aggregate(models.Sum('duration_minutes'))['duration_minutes__sum'] or 0
+            elif goal.goal_type == 'calories':
+                progress = activities.aggregate(models.Sum('calories_burned'))['calories_burned__sum'] or 0
+            else:
+                progress = 0
+            
+            if progress >= goal.target_value:
+                goal.achieved = True
+                goal.save()
+                Notification.objects.create(
+                    user=self.request.user,
+                    message=f"Congratulations! You've achieved your {goal.goal_type} goal of {goal.target_value} { 'km' if goal.goal_type == 'distance' else 'minutes' if goal.goal_type == 'duration' else 'calories' }."
+                )
 
     @action(detail=False, methods=['get'], url_path='metrics')
     def metrics(self, request):
@@ -83,3 +113,14 @@ class ActivityViewSet(viewsets.ModelViewSet):
             response['trend'] = list(trend)
 
         return Response(response)
+
+class GoalViewSet(viewsets.ModelViewSet):
+    queryset = Goal.objects.all()
+    serializer_class = GoalSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        user = self.request.user
+        if not user.is_authenticated:
+            return Goal.objects.none()
+        return Goal.objects.filter(user=self.request.user).order_by('-start_date')
