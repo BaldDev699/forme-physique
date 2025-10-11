@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Activity
+from .models import Activity, Goal
     
 # Serializer for the Activity model to handle fitness activity data
 class ActivitySerializer(serializers.ModelSerializer):
@@ -26,4 +26,27 @@ class ActivitySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Distance cannot be negative.")
         if 'date' not in data or data.get('date') is None:
             raise serializers.ValidationError("Date is required.")
+        return data
+    
+# Serializer for the Goal model to handle fitness goals
+class GoalSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Goal
+        fields = [
+            'id', 'user', 'goal_type', 'target_value', 'period',
+            'start_date', 'achieved'
+        ]
+        read_only_fields = ['id', 'achieved']
+
+    def validate(self, data):
+        if 'goal_type' not in data:
+            raise serializers.ValidationError("Goal type is required.")
+        if 'target_value' not in data or data.get('target_value') is None:
+            raise serializers.ValidationError("Target value is required.")
+        if data['target_value'] <= 0:
+            raise serializers.ValidationError("Target value must be a positive number.")
+        if 'period' not in data:
+            raise serializers.ValidationError("Period is required.")
         return data
