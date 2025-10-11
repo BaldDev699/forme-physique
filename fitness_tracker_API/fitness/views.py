@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
 from datetime import date, timedelta
-from fitness import models
+from django.db import models
 from notifications.models import Notification
 
         
