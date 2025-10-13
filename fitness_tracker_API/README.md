@@ -1,142 +1,117 @@
-🏋️‍♂️ Fitness Tracker API
-📌 Project Overview
+# 🏋️‍♂️ Fitness Tracker API
 
-The Fitness Tracker API is a backend system built with Django and Django REST Framework (DRF) that allows users to manage and track their fitness activities.
-Users can log, update, delete, and view their activity history while tracking performance metrics such as calories burned, total duration, and distance covered.
+## 📌 Project Overview
+The **Fitness Tracker API** is a backend system built with **Django** and **Django REST Framework (DRF)** that allows users to manage and track their fitness activities.  
+Users can log, update, delete, and view their activity history while tracking performance metrics such as calories burned, total duration, and distance covered.  
 
-This project simulates a real-world backend application focusing on database management, user authentication, and activity tracking.
+This project simulates a real-world backend application focusing on **database management**, **user authentication**, and **activity tracking**.
 
-🚀 Features
-🏃‍♂️ Activity Management (CRUD)
+---
 
-Create, Read, Update, and Delete fitness activities.
+## 🚀 Features
 
-Each activity includes:
+### 🏃‍♂️ Activity Management (CRUD)
+- Create, Read, Update, and Delete fitness activities.
+- Each activity includes:
+  - Activity Type (e.g., Running, Cycling, Weightlifting)
+  - Duration (minutes)
+  - Distance (km/miles)
+  - Calories Burned
+  - Date
+  - User ID (owner)
+- Validations for required fields (Activity Type, Duration, Date).
 
-Activity Type (e.g., Running, Cycling, Weightlifting)
+### 👤 User Management (CRUD)
+- Users can register, update profiles, and delete accounts.
+- Each user has:
+  - Username  
+  - Email  
+  - Password  
+- Users can only manage their own activities.
+- Permissions prevent users from modifying or deleting activities of others.
 
-Duration (minutes)
+### 📅 Activity History
+- Endpoint to view all logged activities by the user.
+- Optional filters:
+  - By Date Range  
+  - By Activity Type
 
-Distance (km/miles)
+### 📊 Activity Metrics
+- Summary endpoint showing:
+  - Total duration of activities  
+  - Total distance covered  
+  - Total calories burned  
+- Optional activity trends (weekly/monthly tracking).
 
-Calories Burned
+### 🔔 Notifications and Reminders
+- A notification system that reminds users to log their activities or alerts them when they achieve specific fitness goals.
 
-Date
+### ⚙️ Additional Features
+- Pagination for long activity histories.  
+- Sorting by Date, Duration, or Calories Burned.
 
-User ID (owner)
+---
 
-Validations for required fields (Activity Type, Duration, Date).
+## 🛠️ Technical Stack
+- **Backend:** Django, Django REST Framework (DRF)  
+- **Database:** SQLite (development), PostgreSQL (production)  
+- **Authentication:** Django Authentication + JWT (optional)  
+- **Deployment:** PythonAnywhere  
 
-👤 User Management (CRUD)
+---
 
-Users can register, update profiles, and delete accounts.
+## 🔑 Authentication
+- Users must sign up and log in before performing actions.  
+- Endpoints are secured; only authenticated users can create, update, or delete activities.  
+- JWT authentication available for enhanced security.
 
-Each user has:
+---
 
-Username
+## ⚙️ Installation & Setup
 
-Email
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/forme-physique.git
+   cd forme-physique
+   cd fitness_tracker_API
 
-Password
+2. **Create Virtual Environment**
 
-Users can only manage their own activities.
+    python -m venv venv
+    source venv/bin/activate   # On Linux/Mac
+    venv\Scripts\activate      # On Windows
 
-Permissions prevent users from modifying or deleting activities of others.
 
-📅 Activity History
+3. **Install Dependencies**
 
-Endpoint to view all logged activities by the user.
+    pip install -r requirements.txt
 
-Optional filters:
 
-By Date Range
+3. **Run Migrations**
 
-By Activity Type
+    python manage.py makemigrations
+    python manage.py migrate
 
-📊 Activity Metrics
 
-Summary endpoint showing:
+4. **Create Superuser**
 
-Total duration of activities
+    python manage.py createsuperuser
 
-Total distance covered
 
-Total calories burned
+5. **Run Development Server**
 
-Optional activity trends (weekly/monthly tracking).
+    python manage.py runserver
 
-🔔 Notifications and Reminders
 
-A notification system that reminds users to log their activities or alerts them when they achieve specific fitness goals.
-
-⚙️ Additional Features
-
-Pagination for long activity histories.
-
-Sorting by Date, Duration, or Calories Burned.
-
-🛠️ Technical Stack
-
-Backend: Django, Django REST Framework (DRF)
-
-Database: SQLite (development), PostgreSQL (production)
-
-Authentication: Django Authentication + JWT (optional)
-
-Deployment: PythonAnywhere
-
-🔑 Authentication
-
-Users must sign up and log in before performing actions.
-
-Endpoints are secured; only authenticated users can create, update, or delete activities.
-
-JWT authentication available for enhanced security.
-
-⚙️ Installation & Setup
-
-Clone the Repository
-
-git clone https://github.com/yourusername/forme-physique.git
-cd forme-physique
-cd fitness_tracker_API
-
-
-Create Virtual Environment
-
-python -m venv venv
-source venv/bin/activate   # On Linux/Mac
-venv\Scripts\activate      # On Windows
-
-
-Install Dependencies
-
-pip install -r requirements.txt
-
-
-Run Migrations
-
-python manage.py makemigrations
-python manage.py migrate
-
-
-Create Superuser
-
-python manage.py createsuperuser
-
-
-Run Development Server
-
-python manage.py runserver
-
-
-Access API
+## Access API
 
 Base URL: https://stinger969.pythonanywhere.com/
 
 📡 API Endpoints
-👥 User Authentication
-🔸 Register User
+
+## User Authentication
+
+1. **Register User**
 
 POST /api/auth/register/
 
@@ -148,7 +123,7 @@ Request Body:
   "password": "meth123"
 }
 
-🔸 User Login
+2. **User Login**
 
 POST /api/auth/login/
 
@@ -159,7 +134,7 @@ Request Body:
   "password": "strongpassword123"
 }
 
-🔸 User Logout
+3. **User Logout**
 
 POST /api/auth/logout/
 
@@ -169,8 +144,8 @@ Request Body:
   "refresh": "refresh_token"
 }
 
-💪 Activities
-🔸 Create Activity
+## Activities
+1. **Create Activity**
 
 POST /api/activities/
 
@@ -184,15 +159,15 @@ Request Body:
   "date": "2025-10-09"
 }
 
-🔸 Get All Activities
+2. **Get All Activities**
 
 GET /api/activities/
 
-🔸 Get Single Activity
+3. **Get Single Activity**
 
 GET /api/activities/<id>/
 
-🔸 Update Activity
+4. **Update Activity**
 
 PUT /api/activities/<id>/
 
@@ -206,20 +181,20 @@ Request Body:
   "date": "2025-10-09"
 }
 
-🔸 Delete Activity
+5. **Delete Activity**
 
 DELETE /api/activities/<id>/
 
-📊 Metrics
-🔸 Get Metrics Summary
+## Metrics
+**Get Metrics Summary**
 
 GET /api/activities/metrics/
 
-🔔 Notifications
-🔸 Get Notifications
+## 🔔 Notifications
+**Get Notifications**
 
 GET /api/notifications/notifications/
 
-📄 License
+## 📄 License
 
 This project is licensed under the MIT License – you are free to use and modify it.
