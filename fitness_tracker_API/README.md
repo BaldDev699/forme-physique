@@ -91,10 +91,13 @@ This project simulates a real-world backend application focusing on database man
 *** API ENDPOINTS ***
 
 User Authentication
+
 ** Registration of a user **
 
 POST /api/auth/register/
+
 Request Body:
+
 {
   "username": "methusella",
   "email": "meth@gmail.com",
@@ -104,7 +107,9 @@ Request Body:
 ** User Login **
 
 POST /api/auth/login/
+
 Request Body:
+
 {
   "email": "john@example.com",
   "password": "strongpassword123"
@@ -117,10 +122,13 @@ Request Body:
 }
 
 Activities
+
 ** Create Activity **
 
 POST /api/activities/
+
 Request Body:
+
 {
   "activity_type": "Running",
   "duration": 45,
@@ -134,12 +142,15 @@ Request Body:
 GET /api/activities/
 
 ** Get Single Activity **
+
 GET /api/acitivities/<id>/
 
 ** Update Activity **
 
 PUT /api/activities/<id>/
+
 Request Body:
+
 {
   "activity_type": "Cycling",
   "duration": 60,
