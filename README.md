@@ -41,15 +41,19 @@ This project simulates a real-world backend application focusing on database man
     * Total calories burned
 - Optional activity trends (weekly/monthly tracking).
 
+** Ntifications and Reminders **
+- A notification system that reminds users to log their activities or alerts them when they achieve specific fitness goals.
+
 ** Additional Features **
 - Pagination for long activity histories.
 - Sorting by Date, Duration, or Calories Burned.
+
 
 🛠️ Technical Stack
 - Backend: Django, Django REST Framework (DRF)
 - Database: SQLite (development), PostgreSQL (production)
 - Authentication: Django Authentication + JWT (optional)
-- Deployment: Heroku / PythonAnywhere
+- Deployment: PythonAnywhere
 
 🔑 Authentication
 - Users must sign up and log in before performing actions.
@@ -82,8 +86,69 @@ This project simulates a real-world backend application focusing on database man
     - python manage.py runserver
 
 7. Access API
-    - Base URL: http://127.0.0.1:8000/fitness/
+    - Base URL: https://stinger969.pythonanywhere.com/
 
+*** API ENDPOINTS ***
+User Authentication
+** Registration of a user **
+POST /api/auth/register/
+Request Body:
+{
+  "username": "methusella",
+  "email": "meth@gmail.com",
+  "password": "meth123"
+}
+
+** User Login **
+POST /api/auth/login/
+Request Body:
+{
+  "email": "john@example.com",
+  "password": "strongpassword123"
+}
+
+** User Logout **
+{
+    "refresh": "refresh_token"
+}
+
+Activities
+** Create Activity **
+POST /api/activities/
+Request Body:
+{
+  "activity_type": "Running",
+  "duration": 45,
+  "distance": 10.5,
+  "calories_burned": 450,
+  "date": "2025-10-09"
+}
+
+** Get All Activities **
+GET /api/activities/
+
+** Get Single Activity **
+GET /api/acitivities/<id>/
+
+** Update Activity **
+PUT /api/activities/<id>/
+Request Body:
+{
+  "activity_type": "Cycling",
+  "duration": 60,
+  "distance": 15.0,
+  "calories_burned": 600,
+  "date": "2025-10-09"
+}
+
+** Delete Activity **
+DELETE /api/activities/<id>/
+
+** Metrics **
+GET /api/activities/metrics/
+
+** Notifications **
+GET /api/notifications/notifications/
 
 
 📄 License
