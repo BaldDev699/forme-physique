@@ -89,8 +89,10 @@ This project simulates a real-world backend application focusing on database man
     - Base URL: https://stinger969.pythonanywhere.com/
 
 *** API ENDPOINTS ***
+
 User Authentication
 ** Registration of a user **
+
 POST /api/auth/register/
 Request Body:
 {
@@ -100,6 +102,7 @@ Request Body:
 }
 
 ** User Login **
+
 POST /api/auth/login/
 Request Body:
 {
@@ -108,12 +111,14 @@ Request Body:
 }
 
 ** User Logout **
+
 {
     "refresh": "refresh_token"
 }
 
 Activities
 ** Create Activity **
+
 POST /api/activities/
 Request Body:
 {
@@ -125,12 +130,14 @@ Request Body:
 }
 
 ** Get All Activities **
+
 GET /api/activities/
 
 ** Get Single Activity **
 GET /api/acitivities/<id>/
 
 ** Update Activity **
+
 PUT /api/activities/<id>/
 Request Body:
 {
@@ -142,12 +149,15 @@ Request Body:
 }
 
 ** Delete Activity **
+
 DELETE /api/activities/<id>/
 
 ** Metrics **
+
 GET /api/activities/metrics/
 
 ** Notifications **
+
 GET /api/notifications/notifications/
 
 
